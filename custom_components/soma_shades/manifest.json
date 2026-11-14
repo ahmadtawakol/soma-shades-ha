@@ -10,6 +10,6 @@
   "integration_type": "device",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/vanderkley/soma-shades-ha/issues",
-  "requirements": ["soma-shades @ https://github.com/ahmadtawakol/soma-shades/archive/refs/heads/ha-test.zip"],
+  "requirements": ["soma-shades @ https://github.com/ahmadtawakol/soma-shades/archive/ab59087ab8cb9d7777bc1730ed84d8c0e4fe6a89.zip"],
   "version": "0.3.0"
 }
