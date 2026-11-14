@@ -72,9 +72,18 @@ class FakeShade(ShadeClient):
 
     async def stop(self) -> None:
         self.commands.append("stop")
+        self._target_position = self._position
+        self._notify_update()
 
     async def set_position(self, target) -> None:
         self.commands.append(f"position {target}")
+        self._target_position = int(target)
+        self._notify_update()
+
+    def arrive(self) -> None:
+        """The shade reaches its target position."""
+        self._position = self._target_position
+        self._notify_update()
 
     async def sync_time(self) -> None:
         self.commands.append("sync time")
