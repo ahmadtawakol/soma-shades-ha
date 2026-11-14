@@ -33,5 +33,18 @@
         }
       }
     }
+  },
+  "services": {
+    "move_slowly": {
+      "name": "Move slowly",
+      "description": "Move to a position at a lower motor speed, e.g. to open quietly in the morning. The motor speed is set back when the shade stops.",
+      "fields": {
+        "position": {
+          "name": "Position",
+          "description": "The position to move to: closed at 0 and open at 100. For a Tilt the tilt position: closed downwards at 0, open at 50 and closed upwards at 100."
+        },
+        "speed": { "name": "Speed", "description": "The motor speed during the move." }
+      }
+    }
   }
 }

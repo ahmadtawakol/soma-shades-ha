@@ -34,5 +34,5 @@ class MotorSpeedNumber(ShadeEntity, NumberEntity):
         return self.shade.motor_speed
 
     async def async_set_native_value(self, value: float) -> None:
-        await self.coordinator.async_command(lambda: self.shade.set_motor_speed(int(value)))
+        await self.coordinator.async_set_motor_speed(int(value))
         self.async_write_ha_state()
