@@ -82,6 +82,14 @@ class FakeShade(ShadeClient):
     async def identify(self, sound: int = 1) -> None:
         self.commands.append("identify")
 
+    async def get_motor_speed(self) -> int | None:
+        self.motor_speed = 60
+        return 60
+
+    async def set_motor_speed(self, speed) -> None:
+        self.motor_speed = int(speed)
+        self.commands.append(f"motor speed {speed}")
+
 
 @pytest.fixture(autouse=True)
 def auto_enable_custom_integrations(enable_custom_integrations):

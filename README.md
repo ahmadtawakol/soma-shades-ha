@@ -17,6 +17,7 @@ Every shade is a device with:
     integration. For e.g. a remote without tilt support, turn off *Show as tilt* under *Configure*
 - battery, charging and connection sensors
 - *Identify* and *Sync time* buttons
+- a *Motor speed* setting from 0 to 100%, which the shade keeps, e.g. lower for a quieter shade in the bedroom
 - a *Bluetooth connection* switch
 
 ## Installation
