@@ -16,6 +16,7 @@ Every shade is a device with:
   - a Tilt has a tilt position: closed downwards at 0, open at 50 and closed upwards at 100, as in the SOMA Connect
     integration. For e.g. a remote without tilt support, turn off *Show as tilt* under *Configure*
 - battery, charging and connection sensors
+- *Step up* and *Step down* buttons, which move a shade a small step, e.g. to fine-tune the position
 - *Identify* and *Sync time* buttons
 - a *Motor speed* setting from 0 to 100%, which the shade keeps, e.g. lower for a quieter shade in the bedroom
 - a *Bluetooth connection* switch

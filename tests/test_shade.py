@@ -47,9 +47,11 @@ async def test_commands(hass, entry):
     await service(hass, "cover", "set_cover_position", COVER, position=75)
     await service(hass, "button", "press", "button.living_room_sync_time")
     await service(hass, "button", "press", "button.living_room_identify")
+    await service(hass, "button", "press", "button.living_room_step_up")
+    await service(hass, "button", "press", "button.living_room_step_down")
 
     commands = [command for command in coordinator.shade.commands if not command.startswith("notify")]
-    assert commands == ["up", "down", "stop", "position 25", "sync time", "identify"]
+    assert commands == ["up", "down", "stop", "position 25", "sync time", "identify", "step up", "step down"]
     await hass.config_entries.async_unload(entry.entry_id)
 
 

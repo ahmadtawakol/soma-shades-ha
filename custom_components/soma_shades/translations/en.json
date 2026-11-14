@@ -14,13 +14,21 @@
     }
   },
   "entity": {
-    "button": { "sync_time": { "name": "Sync time" } },
+    "button": {
+      "sync_time": { "name": "Sync time" },
+      "step_up": { "name": "Step up" },
+      "step_down": { "name": "Step down" }
+    },
     "number": { "motor_speed": { "name": "Motor speed" } },
     "sensor": {
       "battery_voltage": { "name": "Battery voltage" },
       "input_voltage": { "name": "Input voltage" },
       "charging_current": { "name": "Charging current" },
-      "connected_since": { "name": "Connected since" }
+      "connected_since": { "name": "Connected since" },
+      "stop_reason": { "name": "Stop reason" },
+      "move_count": { "name": "Moves" },
+      "motor_run_time": { "name": "Motor run time" },
+      "motor_direction_raw": { "name": "Motor direction (raw)" }
     },
     "switch": { "bluetooth_connection": { "name": "Bluetooth connection" } }
   },

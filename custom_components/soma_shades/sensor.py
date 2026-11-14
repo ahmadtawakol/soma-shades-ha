@@ -62,6 +62,32 @@ SENSORS = (
         value_fn=lambda shade: shade.charging_current,
     ),
     ShadeSensorDescription(
+        key="stop_reason",
+        translation_key="stop_reason",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        value_fn=lambda shade: shade.stop_reason,
+    ),
+    ShadeSensorDescription(
+        key="move_count",
+        translation_key="move_count",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        value_fn=lambda shade: shade.move_count,
+    ),
+    ShadeSensorDescription(
+        key="motor_run_time",
+        translation_key="motor_run_time",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        value_fn=lambda shade: shade.motor_run_time,
+    ),
+    ShadeSensorDescription(
+        key="motor_direction_raw",
+        translation_key="motor_direction_raw",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        value_fn=lambda shade: shade.motor_direction,
+    ),
+    ShadeSensorDescription(
         key="connected_since",
         translation_key="connected_since",
         device_class=SensorDeviceClass.TIMESTAMP,

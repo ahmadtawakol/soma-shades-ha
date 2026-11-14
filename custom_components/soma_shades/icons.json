@@ -1,5 +1,9 @@
 {
   "entity": {
+    "button": {
+      "step_up": { "default": "mdi:arrow-up-bold" },
+      "step_down": { "default": "mdi:arrow-down-bold" }
+    },
     "number": { "motor_speed": { "default": "mdi:speedometer" } }
   },
   "services": {

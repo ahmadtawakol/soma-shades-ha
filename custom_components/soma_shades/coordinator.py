@@ -150,8 +150,11 @@ class ShadeCoordinator:
         if position == self._last_position:
             return
         self._last_position = position
-        if self._restore_speed is not None and self.shade.cover_status not in ("opening", "closing"):
+        if self.shade.cover_status in ("opening", "closing"):
+            return
+        if self._restore_speed is not None:
             self._restore_motor_speed()
+        self.entry.async_create_background_task(self.hass, self._read_after_move(), "read after move")
 
     @callback
     def _restore_motor_speed(self) -> None:
@@ -202,9 +205,31 @@ class ShadeCoordinator:
         """Read the motor speed on every connection, it may have changed in the Soma app in the meantime."""
         try:
             await self.connection.run_command(self.shade.get_motor_speed)
+            await self.connection.run_command(self.shade.get_motor_direction)
         except Exception as err:
             _LOGGER.debug("Cannot read the motor speed of %s: %r", self.shade.display_name, err)
             return
+        await self._read_after_move()
+
+    async def _read_after_move(self) -> None:
+        await asyncio.sleep(2)
+        if self.shade.cover_status in ("opening", "closing"):
+            _LOGGER.warning("TEST skipped the read, %s is moving", self.shade.display_name)
+            return
+        try:
+            await self.connection.run_command(self.shade.get_stop_reason)
+            await self.connection.run_command(self.shade.get_move_totals)
+        except Exception as err:
+            _LOGGER.warning("Cannot read after the move of %s: %r", self.shade.display_name, err)
+        _LOGGER.warning(
+            "TEST %s stop_reason=%s moves=%s run_time=%s direction=%s position=%s",
+            self.shade.display_name,
+            self.shade.stop_reason,
+            self.shade.move_count,
+            self.shade.motor_run_time,
+            self.shade.motor_direction,
+            self.shade.position,
+        )
         self.async_update_listeners()
 
     async def _update_device(self) -> None:
