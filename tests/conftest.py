@@ -76,6 +76,12 @@ class FakeShade(ShadeClient):
     async def set_position(self, target) -> None:
         self.commands.append(f"position {target}")
 
+    async def step_up(self) -> None:
+        self.commands.append("step up")
+
+    async def step_down(self) -> None:
+        self.commands.append("step down")
+
     async def sync_time(self) -> None:
         self.commands.append("sync time")
 

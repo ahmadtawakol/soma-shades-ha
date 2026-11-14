@@ -13,7 +13,14 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: ShadeConfigEntry, async_add_entities: AddConfigEntryEntitiesCallback
 ) -> None:
     coordinator = entry.runtime_data
-    async_add_entities([IdentifyButton(coordinator, "identify"), SyncTimeButton(coordinator, "sync_time")])
+    async_add_entities(
+        [
+            IdentifyButton(coordinator, "identify"),
+            SyncTimeButton(coordinator, "sync_time"),
+            StepUpButton(coordinator, "step_up"),
+            StepDownButton(coordinator, "step_down"),
+        ]
+    )
 
 
 class IdentifyButton(ShadeEntity, ButtonEntity):
@@ -34,3 +41,21 @@ class SyncTimeButton(ShadeEntity, ButtonEntity):
 
     async def async_press(self) -> None:
         await self.coordinator.async_command(self.shade.sync_time)
+
+
+class StepUpButton(ShadeEntity, ButtonEntity):
+    """Move up a small step, e.g. to fine-tune the position."""
+
+    _attr_translation_key = "step_up"
+
+    async def async_press(self) -> None:
+        await self.coordinator.async_command(self.shade.step_up)
+
+
+class StepDownButton(ShadeEntity, ButtonEntity):
+    """Move down a small step, e.g. to fine-tune the position."""
+
+    _attr_translation_key = "step_down"
+
+    async def async_press(self) -> None:
+        await self.coordinator.async_command(self.shade.step_down)

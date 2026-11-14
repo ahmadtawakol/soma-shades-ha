@@ -14,7 +14,11 @@
     }
   },
   "entity": {
-    "button": { "sync_time": { "name": "Sync time" } },
+    "button": {
+      "sync_time": { "name": "Sync time" },
+      "step_up": { "name": "Step up" },
+      "step_down": { "name": "Step down" }
+    },
     "sensor": {
       "battery_voltage": { "name": "Battery voltage" },
       "input_voltage": { "name": "Input voltage" },
