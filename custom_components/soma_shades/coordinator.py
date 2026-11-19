@@ -1,7 +1,6 @@
 """The connection between Home Assistant and a shade."""
 
 import asyncio
-import logging
 from collections.abc import Awaitable, Callable
 
 from bleak.backends.device import BLEDevice
@@ -17,8 +16,6 @@ from soma_shades import ConnectionConfig, ShadeClient, ShadeConnection
 from .const import CONF_BLUETOOTH_ENABLED, CONF_SHOW_AS_TILT, CONF_TILT
 
 CONNECTION_CONFIG = ConnectionConfig()
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class ShadeCoordinator:
@@ -81,21 +78,7 @@ class ShadeCoordinator:
         # a shade only advertises while it has no connection, so this also finds the adapter that sees it best
         return bluetooth.async_ble_device_from_address(self.hass, address, connectable=True)
 
-    async def _availability_changed(self, online: bool) -> None:
-        self.async_update_listeners()
-        if online:
-            # the connection holds the lock of the shade while it reports the shade online, so read it afterwards
-            self.entry.async_create_background_task(
-                self.hass, self._read_motor_speed(), f"read the motor speed of {self.shade.display_name}"
-            )
-
-    async def _read_motor_speed(self) -> None:
-        """Read the motor speed on every connection, it may have changed in the Soma app in the meantime."""
-        try:
-            await self.connection.run_command(self.shade.get_motor_speed)
-        except Exception as err:
-            _LOGGER.debug("Cannot read the motor speed of %s: %r", self.shade.display_name, err)
-            return
+    async def _availability_changed(self, _online: bool) -> None:
         self.async_update_listeners()
 
     async def _update_device(self) -> None:

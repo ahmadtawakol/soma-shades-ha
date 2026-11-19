@@ -16,11 +16,14 @@ async def async_setup_entry(
 
 
 class MotorSpeedNumber(ShadeEntity, NumberEntity):
-    """The speed of the motor, which the shade keeps, e.g. lower for a quieter shade in the bedroom."""
+    """The speed of the motor, which the shade keeps, e.g. lower for a quieter shade in the bedroom.
+
+    The connection reads it on every connection, it may have changed in the Soma app.
+    """
 
     _attr_translation_key = "motor_speed"
     _attr_entity_category = EntityCategory.CONFIG
-    _attr_native_min_value = 0
+    _attr_native_min_value = 1
     _attr_native_max_value = 100
     _attr_native_step = 1
     _attr_native_unit_of_measurement = PERCENTAGE
