@@ -15,6 +15,7 @@
   },
   "entity": {
     "button": { "sync_time": { "name": "Sync time" } },
+    "number": { "motor_speed": { "name": "Motor speed" } },
     "sensor": {
       "battery_voltage": { "name": "Battery voltage" },
       "input_voltage": { "name": "Input voltage" },

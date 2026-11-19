@@ -9,6 +9,7 @@ pytestmark = pytest.mark.usefixtures("fake_bluetooth")
 
 COVER = "cover.living_room"
 SWITCH = "switch.living_room_bluetooth_connection"
+MOTOR_SPEED = "number.living_room_motor_speed"
 
 
 async def start(hass, entry):
@@ -49,6 +50,16 @@ async def test_commands(hass, entry):
 
     commands = [command for command in coordinator.shade.commands if not command.startswith("notify")]
     assert commands == ["up", "down", "stop", "position 25", "sync time", "identify"]
+    await hass.config_entries.async_unload(entry.entry_id)
+
+
+async def test_motor_speed(hass, entry):
+    coordinator = await start(hass, entry)
+    assert hass.states.get(MOTOR_SPEED).state == "60"  # read after connecting
+
+    await service(hass, "number", "set_value", MOTOR_SPEED, value=35)
+    assert hass.states.get(MOTOR_SPEED).state == "35"
+    assert "motor speed 35" in coordinator.shade.commands
     await hass.config_entries.async_unload(entry.entry_id)
 
 

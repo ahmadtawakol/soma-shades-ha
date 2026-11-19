@@ -1,0 +1,5 @@
+{
+  "entity": {
+    "number": { "motor_speed": { "default": "mdi:speedometer" } }
+  }
+}
